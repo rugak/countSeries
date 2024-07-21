@@ -1,0 +1,55 @@
+"Date","Niveau","Allonge","Assis","SessionID","formattedDate"
+"1696802400",,"False","False","21","09/10/2023"
+"1618937885","2","True","True","ed73e2a7-8f8a-493c-9388-c7cc4714b0ad","20/04/2021"
+"1618937885","2","True","True","ed73e2a7-8f8a-493c-9388-c7cc4714b0ad","20/04/2021"
+
+
+Un exercice peut être assis ou allongé
+Un exercice peut être de 5’ (niveau=1) ou de 10’ (niveau=2)
+
+Un utilisateur doit effectuer 2 exercices de 5’ ou 1 exercice de 10’ pour compléter une séance.
+
+Une pratique est un couple séance assis et séance allongé le même jour.
+
+Chaque jour d’affilé pratiqué incrémente la série de +1.
+
+L’utilisateur dispose de 2 vies pour pallier l’absence de pratique sur un jour
+Chaque jour sans pratique consomme 1 vie.
+Les jours compensés par une vie peuvent être marqué par une ligne « Allonge=False » et « Assis=False »
+
+
+
+
+Lorsque l’utilisateur a consommé plus de vie qu’il n’en avait
+la série est « cassée » et reprend de 0
+2 vies sont recréditées
+
+1 vie est regagnée tous les 5 jours consécutifs de pratique.
+Le nombre de vie maximal est 2.
+
+
+/*
+ * 1 Séance : 10 min assis ou debout
+ * 1 Pratique : 10 min assis et 10 min debout (20min) ==> 2* séance
+ * 
+Séance 1:      
+    1 true true ===> 5 * 2 = 10 min 
+
+Séance 2:      
+    1 true false ===> 5 * 2 = 10 min 
+    1 false true ===> 5 * 2 = 10 min 
+
+- Séance 2:      
+    1 false true ===> 5 * 2 = 10 min 
+    1 true false ===> 5 * 2 = 10 min 
+
+Séance 3:      
+    2 true true ===> 10 * 2 = 20 min 
+
+Séance 4:      
+    2 false true ===> 10 * 1 = 10 min
+
+- Séance 4:      
+    2 false true ===> 10 * 1 = 10 min
+
+ */
