@@ -103,6 +103,9 @@ def read_csv(input_csv: str, output_csv: str) -> List[Exercice]:
             count_series(grouped_exercices)
 
     exercices = [ex for ex_list in exercices_dict.values() for ex in ex_list]
+
+    exercices = [ex for ex in exercices if ex.formatted_date is not None]
+    exercices.sort(key=lambda ex: ex.formatted_date)
     write_csv(output_csv, exercices)
 
 def write_csv(output_csv: str, exercices: List[Exercice]) -> None:
@@ -128,18 +131,19 @@ def main():
     input_csv = './input/Enregistrement.csv'
     output_csv = './output/output' + datetime.now().strftime('%Y-%m-%d-%H_%M_%S') + ".csv"
 
+    read_csv(input_csv, output_csv)
 
-    parser = argparse.ArgumentParser(description='Process some CSV files.')
 
-    # Ajoutez des arguments pour les fichiers d'entrée et de sortie
-    parser.add_argument('input_csv', type=str, help='Path to the input CSV file')
-    parser.add_argument('output_csv', type=str, help='Path to the output CSV file')
+### Décommenter pour utiliser les arguments en ligne de commande : exemple : py main.py input/Enregistrement.csv output/output.csv    
 
-    # Parsez les arguments
-    args = parser.parse_args()
+    # parser = argparse.ArgumentParser(description='Process some CSV files.')
 
-    # Appelez la fonction read_csv avec les arguments fournis
-    read_csv(args.input_csv, args.output_csv)
+    # parser.add_argument('input_csv', type=str, help='Path to the input CSV file')
+    # parser.add_argument('output_csv', type=str, help='Path to the output CSV file')
+
+    # args = parser.parse_args()
+
+    # read_csv(args.input_csv, args.output_csv)
 
 if __name__ == "__main__":
     main()
